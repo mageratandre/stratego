@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://gepaytffeim7"]
+
+[ext_resource type="Script" uid="uid://be7rf5ltwvm5i" path="res://scripts/clickable_area.gd" id="1_ciul7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_86cna"]
+size = Vector3(1.5, 0.1, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_boogr"]
+albedo_color = Color(0.36078432, 0.69411767, 0.36078432, 0.37254903)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v2a3n"]
+material = SubResource("StandardMaterial3D_boogr")
+size = Vector3(1.5, 0.1, 1.5)
+
+[node name="clickable_area" type="Area3D" unique_id=2052989643]
+script = ExtResource("1_ciul7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1580266086]
+shape = SubResource("BoxShape3D_86cna")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=862396001]
+visible = false
+mesh = SubResource("BoxMesh_v2a3n")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

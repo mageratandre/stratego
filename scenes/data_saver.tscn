@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dno1ajaofe8eh"]
+
+[ext_resource type="Script" uid="uid://cu5lcyrv10erx" path="res://scripts/data_saver.gd" id="1_hi7ir"]
+
+[node name="DataSaver" type="Node" unique_id=1777036214]
+script = ExtResource("1_hi7ir")

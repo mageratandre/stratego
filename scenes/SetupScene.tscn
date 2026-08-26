@@ -1,0 +1,697 @@
+[gd_scene format=3 uid="uid://qumtonbdik3e"]
+
+[ext_resource type="Script" uid="uid://jc2ekw22sx7x" path="res://scripts/setup_scene.gd" id="1_si8ln"]
+[ext_resource type="Theme" uid="uid://bg73x8xepduax" path="res://UI_general.theme" id="2_84tqw"]
+[ext_resource type="Texture2D" uid="uid://c05exbiqkbsuc" path="res://assets/images/banner.png" id="2_hwjhr"]
+[ext_resource type="Texture2D" uid="uid://bqq7dwx4b0pfb" path="res://arrow.png" id="2_kc57c"]
+[ext_resource type="Script" uid="uid://cffnm7v5ic6mu" path="res://scripts/setup_UI.gd" id="2_q2tdn"]
+[ext_resource type="Texture2D" uid="uid://bh28cof6r3hbf" path="res://assets/images/colonel.png" id="2_xe801"]
+[ext_resource type="Texture2D" uid="uid://bhyk7snmcc35w" path="res://assets/images/bomb.png" id="3_jlfk1"]
+[ext_resource type="Texture2D" uid="uid://bkynyjv3hj3o1" path="res://saving_icon.png" id="4_1r0wo"]
+[ext_resource type="Theme" uid="uid://eyev278hpsq4" path="res://piece_selection.theme" id="4_647gk"]
+[ext_resource type="Script" uid="uid://c7p2ci6k22ah8" path="res://scripts/piece.gd" id="4_gnek6"]
+[ext_resource type="Texture2D" uid="uid://csfnfrse3v08k" path="res://assets/images/spy.png" id="4_jlfk1"]
+[ext_resource type="Texture2D" uid="uid://git6q6xdjaaj" path="res://assets/images/captain.png" id="4_q2tdn"]
+[ext_resource type="ArrayMesh" uid="uid://cqugbct05nfh6" path="res://assets/piece.tres" id="5_0c13y"]
+[ext_resource type="Texture2D" uid="uid://b81hldwcp2ov1" path="res://grid.png" id="5_1r0wo"]
+[ext_resource type="Texture2D" uid="uid://dcabh7n5jkno6" path="res://assets/images/marshal.png" id="5_q2tdn"]
+[ext_resource type="Material" uid="uid://csvi32sxq5ets" path="res://selection_piece_mat.tres" id="6_0c13y"]
+[ext_resource type="ArrayMesh" uid="uid://bjvhguq0p82ra" path="res://assets/image.tres" id="6_qfdpe"]
+[ext_resource type="Texture2D" uid="uid://dae7pye245x1" path="res://assets/images/general.png" id="7_jwanp"]
+[ext_resource type="Texture2D" uid="uid://hmckpovyh1bi" path="res://assets/images/major.png" id="9_ea5ne"]
+[ext_resource type="Texture2D" uid="uid://dq3plcepkbyja" path="res://assets/images/lieutenant.png" id="11_647gk"]
+[ext_resource type="Texture2D" uid="uid://840ej4yjjs7a" path="res://red_cross_no_bg_2.png" id="12_cl5jp"]
+[ext_resource type="Texture2D" uid="uid://ohptjx257a43" path="res://assets/images/sergeant.png" id="12_si8ln"]
+[ext_resource type="Texture2D" uid="uid://bylko6kxqelt3" path="res://assets/images/miner.png" id="13_1py6k"]
+[ext_resource type="Texture2D" uid="uid://s3oej3sh0yh0" path="res://assets/images/scout.png" id="14_q4vyn"]
+[ext_resource type="PackedScene" uid="uid://3esk1jvf3ecb" path="res://scenes/minimap.tscn" id="17_bn3ql"]
+[ext_resource type="PackedScene" uid="uid://ds8fvocwu5yy" path="res://scenes/player.tscn" id="22_bn3ql"]
+[ext_resource type="PackedScene" uid="uid://baheyr3wccbjo" path="res://scenes/spawner_3d.tscn" id="23_bn3ql"]
+[ext_resource type="PackedScene" uid="uid://cv7qalwedgewc" path="res://scenes/map.tscn" id="28_bn3ql"]
+[ext_resource type="PackedScene" uid="uid://dno1ajaofe8eh" path="res://scenes/data_saver.tscn" id="29_ch613"]
+[ext_resource type="PackedScene" uid="uid://ckgnpm521fpgn" path="res://scenes/message.tscn" id="30_motey"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ea5ne"]
+bg_color = Color(0.50928617, 0.50928617, 0.50928617, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_647gk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_si8ln"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1py6k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q4vyn"]
+
+[sub_resource type="Theme" id="Theme_n11to"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic7ih"]
+
+[node name="SetupScene" type="Node3D" unique_id=1940889375 node_paths=PackedStringArray("control_ui", "Spawner_3D", "map", "piece_translucent", "minimap", "datasaver", "message_error")]
+script = ExtResource("1_si8ln")
+control_ui = NodePath("Control")
+Spawner_3D = NodePath("Spawner3D")
+map = NodePath("Map")
+piece_translucent = NodePath("Piece")
+minimap = NodePath("MiniMap")
+datasaver = NodePath("DataSaver")
+message_error = NodePath("Message")
+
+[node name="Control" type="Control" parent="." unique_id=490806932 node_paths=PackedStringArray("h_split_container", "banner", "bomb", "spy", "marshal", "general", "colonel", "major", "captain", "lieutenant", "sergeant", "miner", "scout")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 513.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_q2tdn")
+h_split_container = NodePath("HScrollBar/HSplitContainer")
+banner = NodePath("HScrollBar/HSplitContainer/banner")
+bomb = NodePath("HScrollBar/HSplitContainer/bomb")
+spy = NodePath("HScrollBar/HSplitContainer/spy")
+marshal = NodePath("HScrollBar/HSplitContainer/marshal")
+general = NodePath("HScrollBar/HSplitContainer/General")
+colonel = NodePath("HScrollBar/HSplitContainer/colonel")
+major = NodePath("HScrollBar/HSplitContainer/major")
+captain = NodePath("HScrollBar/HSplitContainer/captain")
+lieutenant = NodePath("HScrollBar/HSplitContainer/lieutenant")
+sergeant = NodePath("HScrollBar/HSplitContainer/sergeant")
+miner = NodePath("HScrollBar/HSplitContainer/miner")
+scout = NodePath("HScrollBar/HSplitContainer/scout")
+
+[node name="HScrollBar" type="HScrollBar" parent="Control" unique_id=21486744]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/scroll = SubResource("StyleBoxFlat_ea5ne")
+theme_override_styles/scroll_focus = SubResource("StyleBoxEmpty_647gk")
+theme_override_styles/grabber = SubResource("StyleBoxEmpty_si8ln")
+theme_override_styles/grabber_highlight = SubResource("StyleBoxEmpty_1py6k")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxEmpty_q4vyn")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Control/HScrollBar" unique_id=1965724991]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 227.00085
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(8, -16, -46, -78, -109, -139, -171, -202, -232, -264, -303)
+collapsed = true
+split_offset = 8
+
+[node name="banner" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=2132142483]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_hwjhr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="banner_button" type="Button" parent="Control/HScrollBar/HSplitContainer/banner" unique_id=424336537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_colors/icon_pressed_color = Color(1, 0.36078432, 1, 1)
+theme_override_font_sizes/font_size = 75
+text = "5"
+autowrap_mode = 2
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/banner" unique_id=1338499741]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/banner" unique_id=544791522]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="bomb" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=1069737161]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_jlfk1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="bomb_button" type="Button" parent="Control/HScrollBar/HSplitContainer/bomb" unique_id=847329794]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/bomb" unique_id=145644479]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/bomb" unique_id=1324139172]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="spy" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=429371317]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_jlfk1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="spy_button" type="Button" parent="Control/HScrollBar/HSplitContainer/spy" unique_id=1651250249]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/spy" unique_id=1403420869]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/spy" unique_id=26639635]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="marshal" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=500946190]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_q2tdn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="marshal_button" type="Button" parent="Control/HScrollBar/HSplitContainer/marshal" unique_id=1700963897]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/marshal" unique_id=966292868]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/marshal" unique_id=35300953]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="General" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=1271200316]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_jwanp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="general_button" type="Button" parent="Control/HScrollBar/HSplitContainer/General" unique_id=749776110]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/General" unique_id=904879348]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/General" unique_id=1981907817]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="colonel" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=233084468]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_xe801")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="colonel_button" type="Button" parent="Control/HScrollBar/HSplitContainer/colonel" unique_id=1348305003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/colonel" unique_id=1274423342]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/colonel" unique_id=1032156683]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="major" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=76861814]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_ea5ne")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="major_button" type="Button" parent="Control/HScrollBar/HSplitContainer/major" unique_id=1246507661]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/major" unique_id=1149944333]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/major" unique_id=951115078]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="captain" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=1786435974]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_q2tdn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="captain_button" type="Button" parent="Control/HScrollBar/HSplitContainer/captain" unique_id=1806101544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/captain" unique_id=1698110125]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/captain" unique_id=321229800]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="lieutenant" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=1210762350]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("11_647gk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="lieutenant_button" type="Button" parent="Control/HScrollBar/HSplitContainer/lieutenant" unique_id=1892951803]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/lieutenant" unique_id=331460508]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/lieutenant" unique_id=724685561]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="sergeant" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=336415900]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("12_si8ln")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="sergeant_button" type="Button" parent="Control/HScrollBar/HSplitContainer/sergeant" unique_id=2144074075]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/sergeant" unique_id=1469357639]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/sergeant" unique_id=1877841218]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="miner" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=1981122587]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("13_1py6k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="miner_button" type="Button" parent="Control/HScrollBar/HSplitContainer/miner" unique_id=710369683]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/miner" unique_id=1930029637]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/miner" unique_id=2012981688]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="scout" type="TextureRect" parent="Control/HScrollBar/HSplitContainer" unique_id=306111591]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("14_q4vyn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="scout_buttons" type="Button" parent="Control/HScrollBar/HSplitContainer/scout" unique_id=1390240075]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_647gk")
+theme_override_font_sizes/font_size = 75
+
+[node name="GrayArea" type="ColorRect" parent="Control/HScrollBar/HSplitContainer/scout" unique_id=1783367482]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.4745098)
+
+[node name="Cross" type="TextureRect" parent="Control/HScrollBar/HSplitContainer/scout" unique_id=1808693884]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n11to")
+texture = ExtResource("12_cl5jp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiniMap" parent="." unique_id=1779216556 instance=ExtResource("17_bn3ql")]
+visible = false
+
+[node name="Button_exit_scene" type="Button" parent="." unique_id=1286426893]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_top = 20.0
+offset_right = -19.0
+offset_bottom = 70.0
+grow_horizontal = 0
+theme = ExtResource("2_84tqw")
+icon = ExtResource("2_kc57c")
+text_overrun_behavior = 2
+autowrap_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button_load_data" type="Button" parent="." unique_id=1271960337]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_top = 80.0
+offset_right = -19.0
+offset_bottom = 130.0
+grow_horizontal = 0
+theme = ExtResource("2_84tqw")
+icon = ExtResource("4_1r0wo")
+autowrap_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button_show_grid" type="Button" parent="." unique_id=1356820274]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_top = 140.0
+offset_right = -19.0
+offset_bottom = 190.0
+grow_horizontal = 0
+theme = ExtResource("2_84tqw")
+icon = ExtResource("5_1r0wo")
+autowrap_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Player" parent="." unique_id=1816760456 instance=ExtResource("22_bn3ql")]
+transform = Transform3D(7.54979e-08, -0.7124244, 0.70174885, 0, 0.70174885, 0.7124244, -1, -5.3786547e-08, 5.2980564e-08, 14.081543, 7.4886475, 0.00013856737)
+
+[node name="Spawner3D" parent="." unique_id=1420889105 instance=ExtResource("23_bn3ql")]
+
+[node name="Piece" type="Area3D" parent="." unique_id=1764085237 node_paths=PackedStringArray("icon")]
+transform = Transform3D(0.99951965, 0, -0.03099052, 0, 1, 0, 0.03099052, 0, 0.99951965, 2.9676328, 1.1, -2.9514785)
+script = ExtResource("4_gnek6")
+icon = NodePath("Face/Decal")
+
+[node name="Tower" type="MeshInstance3D" parent="Piece" unique_id=371189031]
+mesh = ExtResource("5_0c13y")
+surface_material_override/0 = ExtResource("6_0c13y")
+
+[node name="Face" type="MeshInstance3D" parent="Piece" unique_id=355214729]
+layers = 2
+mesh = ExtResource("6_qfdpe")
+surface_material_override/0 = SubResource("StandardMaterial3D_ic7ih")
+
+[node name="Decal" type="Decal" parent="Piece/Face" unique_id=541659405]
+transform = Transform3D(0.08022201, 0.4955415, 0.09001675, 0.083458304, 0.07681205, -0.49722692, -0.4966882, 0.09294348, -0.06900988, 0.653, 0.844, 0)
+layers = 2
+texture_albedo = ExtResource("2_hwjhr")
+upper_fade = 0.029421845
+lower_fade = 0.0043735607
+cull_mask = 1048574
+
+[node name="Map" parent="." unique_id=503041579 instance=ExtResource("28_bn3ql")]
+
+[node name="DataSaver" parent="." unique_id=1777036214 instance=ExtResource("29_ch613")]
+
+[node name="Message" parent="." unique_id=411125474 instance=ExtResource("30_motey")]
+visible = false
+
+[connection signal="value_changed" from="Control/HScrollBar" to="Control" method="_on_h_scroll_bar_value_changed"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/banner/banner_button" to="Control" method="_on_banner_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/bomb/bomb_button" to="Control" method="_on_bomb_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/spy/spy_button" to="Control" method="_on_spy_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/marshal/marshal_button" to="Control" method="_on_marshal_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/General/general_button" to="Control" method="_on_general_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/colonel/colonel_button" to="Control" method="_on_colonel_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/major/major_button" to="Control" method="_on_major_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/captain/captain_button" to="Control" method="_on_captain_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/lieutenant/lieutenant_button" to="Control" method="_on_lieutenant_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/sergeant/sergeant_button" to="Control" method="_on_sergeant_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/miner/miner_button" to="Control" method="_on_miner_button_button_down"]
+[connection signal="button_down" from="Control/HScrollBar/HSplitContainer/scout/scout_buttons" to="Control" method="_on_scout_buttons_button_down"]
+[connection signal="pressed" from="Button_exit_scene" to="." method="_on_button_exit_scene_pressed"]
+[connection signal="pressed" from="Button_load_data" to="." method="_on_button_load_data_pressed"]
+[connection signal="pressed" from="Button_show_grid" to="." method="_on_button_show_grid_pressed"]

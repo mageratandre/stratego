@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dcrbhk4kkl1pn"]
+
+[ext_resource type="Script" uid="uid://xmydpyux81nq" path="res://scripts/map_6x_8.gd" id="1_himn3"]
+[ext_resource type="MeshLibrary" uid="uid://rtqjjappo2m6" path="res://assets/ML.meshlib" id="2_ajc8d"]
+[ext_resource type="ArrayMesh" uid="uid://d3222m3kkym2k" path="res://assets/rock1.tres" id="3_cmd34"]
+[ext_resource type="ArrayMesh" uid="uid://c2v6qm7mjpmic" path="res://assets/rock2.tres" id="4_28jcn"]
+[ext_resource type="ArrayMesh" uid="uid://0rqb0s4sullx" path="res://assets/rock3.tres" id="5_dloi7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2a3n"]
+albedo_color = Color(0.5019608, 0.7058824, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_86cna"]
+material = SubResource("StandardMaterial3D_v2a3n")
+size = Vector2(2000, 2000)
+center_offset = Vector3(0, -1.835, 0)
+
+[node name="Map_6x8" type="Node3D" unique_id=503041579 node_paths=PackedStringArray("container", "ground_tiles")]
+script = ExtResource("1_himn3")
+container = NodePath("Container")
+ground_tiles = NodePath("GroundTiles")
+
+[node name="GroundTiles" type="GridMap" parent="." unique_id=1256698842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19, 0)
+mesh_library = ExtResource("2_ajc8d")
+data = {
+"cells": PackedInt32Array(0, 65535, 5, 1, 65535, 5, 2, 65535, 5, 3, 65535, 5, 65535, 65535, 5, 65534, 65535, 5, 65533, 65535, 5, 65532, 65535, 5, 65532, 0, 5, 65535, 0, 5, 65534, 0, 5, 65533, 0, 5, 0, 0, 5, 1, 0, 5, 2, 0, 5, 3, 0, 5, 0, 65534, 5, 0, 65533, 5, 65535, 65533, 5, 65535, 65534, 5, 65535, 1, 5, 65535, 2, 5, 0, 1, 5, 0, 2, 5, 1, 1, 5, 2, 1, 5, 3, 1, 5, 1, 2, 5, 2, 2, 5, 3, 2, 5, 65534, 1, 5, 65534, 2, 5, 65533, 2, 5, 65533, 1, 5, 65532, 1, 5, 65532, 2, 5, 1, 65534, 5, 2, 65534, 5, 3, 65534, 5, 3, 65533, 5, 2, 65533, 5, 1, 65533, 5, 65534, 65534, 5, 65534, 65533, 5, 65533, 65533, 5, 65533, 65534, 5, 65532, 65534, 5, 65532, 65533, 5)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=2011993649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.0444207)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1575758414]
+transform = Transform3D(-0.053011544, 0.6641787, 0, -0.60636234, -0.02960777, 0.42788038, 0.5944765, 0.029027402, 0.43643537, 0, 1.0216377, 3.066492)
+mesh = ExtResource("3_cmd34")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D" unique_id=931255350]
+transform = Transform3D(-0.49800155, -0.3587205, 0.37017652, 0.67842877, -0.1646264, 0.33642158, -0.1249672, 0.5357895, 0.3512084, -1.0082793, 1.0216377, 3.994339)
+mesh = ExtResource("3_cmd34")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D" unique_id=1977503783]
+transform = Transform3D(-0.62782264, -0.52280444, 0.43232095, 0.85528433, -0.2399289, 0.3928993, -0.15754418, 0.7808673, 0.41016847, 0.34133923, 1.134547, 3.994339)
+mesh = ExtResource("4_28jcn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D" unique_id=1706994611]
+transform = Transform3D(-0.3017013, -0.92841005, -0.048134953, 0.5657394, -0.09263338, -0.6025932, 0.8598882, -0.26479757, 0.37957057, 0.8792571, 1.1345475, 4.8992896)
+mesh = ExtResource("4_28jcn")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Node3D" unique_id=260041177]
+transform = Transform3D(-0.6259311, -0.9813267, 0.49339, 0.19734, -1.174852, -0.5908461, 0.8801978, -0.4344453, 0.48332953, -0.74729943, 1.1345475, 4.8992896)
+mesh = ExtResource("5_dloi7")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Node3D" unique_id=1638389939]
+transform = Transform3D(-0.4897842, -0.90720415, 0.41559458, 0.6459736, -0.96784866, 0.03229325, 0.28448611, 0.635779, 0.6421789, -1.1909008, 1.1345475, 2.7928214)
+mesh = ExtResource("5_dloi7")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Node3D" unique_id=1326151105]
+transform = Transform3D(-0.25298363, -0.6767832, 0.36781135, 0.3336587, -0.7220247, 0.028580312, 0.14694294, 0.4742974, 0.568344, 1.1406126, 1.1345475, 2.8830123)
+mesh = ExtResource("5_dloi7")
+
+[node name="Container" type="Node3D" parent="." unique_id=2051137409]
+
+[node name="Sea" type="MeshInstance3D" parent="." unique_id=1141699712]
+mesh = SubResource("PlaneMesh_86cna")

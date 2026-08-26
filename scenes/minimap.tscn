@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://3esk1jvf3ecb"]
+
+[ext_resource type="Script" uid="uid://divmd5b3t5udx" path="res://scripts/minimap.gd" id="1_lj7mc"]
+
+[node name="MiniMap" type="Control" unique_id=1779216556 node_paths=PackedStringArray("container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lj7mc")
+container = NodePath("ColorRect/GridContainer")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=984256521]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect" unique_id=1542713114]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39149305
+anchor_top = 0.29475307
+anchor_right = 0.596
+anchor_bottom = 0.63500005
+offset_left = -220.0
+offset_top = -138.0
+offset_right = 162.40796
+offset_bottom = 159.51996
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(298, 256)
+columns = 2
