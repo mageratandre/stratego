@@ -12,8 +12,7 @@ var dict = {}
 func _ready() -> void:
 	datasaver.open_file(file_to_read, FileAccess.READ)
 	n_turn = datasaver.get_number_of_turn()
-	print(n_turn)
-	datasaver.extract_dict_at_position(0)
+	var dict = datasaver.extract_dict_at_position(1045)
 	datasaver.close_file()
 
 
