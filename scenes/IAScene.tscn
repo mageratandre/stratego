@@ -2,23 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dqif8hnbsxx1f" path="res://scripts/i_avs_ia_scene.gd" id="1_fst12"]
 [ext_resource type="PackedScene" uid="uid://caoekqhbnrvsr" path="res://scenes/game_logic.tscn" id="2_gl2jd"]
-[ext_resource type="PackedScene" uid="uid://secrdcbc72va" path="res://scenes/ia.tscn" id="3_0cuf1"]
 [ext_resource type="PackedScene" uid="uid://cv7qalwedgewc" path="res://scenes/map.tscn" id="4_hgj3n"]
 [ext_resource type="PackedScene" uid="uid://dno1ajaofe8eh" path="res://scenes/data_saver.tscn" id="5_gl2jd"]
 
-[node name="IAvsIAScene" type="Node" unique_id=941691256 node_paths=PackedStringArray("gamelogic", "ia_red", "ia_blue", "map", "datasaver")]
+[node name="IAvsIAScene" type="Node" unique_id=941691256 node_paths=PackedStringArray("gamelogic", "map", "datasaver")]
 script = ExtResource("1_fst12")
 gamelogic = NodePath("GameLogic")
-ia_red = NodePath("IA_red")
-ia_blue = NodePath("IA_blue")
 map = NodePath("Map")
 datasaver = NodePath("DataSaver")
 
 [node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("2_gl2jd")]
-
-[node name="IA_red" parent="." unique_id=1023900965 instance=ExtResource("3_0cuf1")]
-
-[node name="IA_blue" parent="." unique_id=33887115 instance=ExtResource("3_0cuf1")]
 
 [node name="Map" parent="." unique_id=503041579 instance=ExtResource("4_hgj3n")]
 visible = false

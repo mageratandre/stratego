@@ -15,11 +15,12 @@ var icon_pause = load("res://pause.png")
 
 var n_turn = 0
 var current_turn = 1
-var time_between_change = 0.5
+var time_between_change = 0.05
 
 var dict = {}
 
 var playing = false
+var sliding = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,6 +40,8 @@ func load_turn(index : int):
 	datasaver.close_file()
 	minimap.draw_pieces(dict)
 	turn_display_label.text = str(index)+"/"+str(n_turn)
+	if !sliding : 
+		turn_slider.value = (float(index)/float(n_turn))*100
 
 func get_number_of_turn():
 	datasaver.open_file(file_to_read, FileAccess.READ)
@@ -78,10 +81,19 @@ func _on_forward_pressed() -> void:
 		change_current_turn(current_turn+1)
 
 
-func _on_turn_count_slider_value_changed(value: float) -> void:
-	change_current_turn(int(1+value*((n_turn-1)/100.0)))
+func _on_turn_count_slider_value_changed(value: float) -> void: 
+	if sliding : 
+		change_current_turn(int(1+value*((n_turn-1)/100.0)))
 
 func main_loop():
 	while playing : 
 		change_current_turn(current_turn+1)
 		await get_tree().create_timer(time_between_change).timeout
+
+
+func _on_turn_count_slider_drag_started() -> void:
+	sliding = true
+
+
+func _on_turn_count_slider_drag_ended(value_changed: bool) -> void:
+	sliding = false

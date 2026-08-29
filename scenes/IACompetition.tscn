@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://xn0tph36ws4p"]
+
+[ext_resource type="Script" uid="uid://56fxufmi8ieh" path="res://scripts/ia_competition.gd" id="1_6msrc"]
+
+[node name="IACompetition" type="Node" unique_id=1019582014]
+script = ExtResource("1_6msrc")
+
+[node name="Button" type="Button" parent="." unique_id=751959260]
+offset_left = 523.0
+offset_top = 275.0
+offset_right = 645.0
+offset_bottom = 306.0
+text = "Launch Games"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
