@@ -10,7 +10,7 @@ var current_player : int
 
 signal piece_move(player,move,dict)
 signal piece_captured(piece1,piece2,winner,tied,cell)
-signal end_game(winner)
+signal end_game(winner,captured)
 
 func set_player(player):
 	self.current_player = player
@@ -64,9 +64,9 @@ func compute_possible_moves(player,dict_piece)-> Dictionary:
 	var dict_p_m = get_dict_possible_moves(possible_moves)
 	if(dict_p_m.size() == 0):
 		if player == PieceTypes.color.BLUE : 
-			end_game_function(PieceTypes.color.RED)
+			end_game_function(PieceTypes.color.RED,false)
 		else : 
-			end_game_function(PieceTypes.color.BLUE)
+			end_game_function(PieceTypes.color.BLUE,false)
 	return dict_p_m
 	
 func get_dict_possible_moves(array)->Dictionary:
@@ -90,7 +90,7 @@ func move_piece(player,mvt,dict_main)-> Dictionary:
 		else : 
 			dict_main[mvt[1]] = winner
 			if(piece_ennemy[0] == PieceTypes.types.BANNER):
-				end_game_function(player)
+				end_game_function(player,true)
 			else : 
 				piece_captured.emit(piece,piece_ennemy,winner,false,mvt[1])
 	else : 
@@ -169,8 +169,8 @@ func check_spy(piece1,piece2):
 	else : 
 		return [false]
 		
-func end_game_function(winner):
+func end_game_function(winner,captured):
 	finished = true
-	end_game.emit(winner)
+	end_game.emit(winner,captured)
 	
 	

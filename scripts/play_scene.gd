@@ -36,7 +36,7 @@ func _ready() -> void:
 	new_game()
 	
 func new_game():
-	gamelogic.set_player(PieceTypes.color.RED)
+	gamelogic.set_player(PieceTypes.color.BLUE)
 	gamelogic.set_map(map)
 	gamelogic.set_dict(dict_total)
 	
@@ -47,7 +47,7 @@ func new_game():
 			dict_total = gamelogic.move_piece(PieceTypes.color.BLUE, mvt, dict_total)
 		else :
 			possible_moves = gamelogic.compute_possible_moves(PieceTypes.color.RED,dict_total)
-			mvt = ia.compute_next_move(PieceTypes.color.RED, possible_moves)
+			mvt = ia.compute_next_move(PieceTypes.color.RED, possible_moves,dict_total)
 			await get_tree().create_timer(time_to_wait).timeout
 			dict_total = gamelogic.move_piece(PieceTypes.color.RED,mvt,dict_total)
 		

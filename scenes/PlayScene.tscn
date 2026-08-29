@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dulijh5th6ga7"]
 
 [ext_resource type="Script" uid="uid://dtsmfjkkn8r0a" path="res://scripts/play_scene.gd" id="1_ityjc"]
-[ext_resource type="PackedScene" uid="uid://secrdcbc72va" path="res://scenes/ia.tscn" id="2_6ojev"]
 [ext_resource type="PackedScene" uid="uid://cv7qalwedgewc" path="res://scenes/map.tscn" id="2_ot0y2"]
 [ext_resource type="PackedScene" uid="uid://ds8fvocwu5yy" path="res://scenes/player.tscn" id="3_21h8x"]
 [ext_resource type="PackedScene" uid="uid://caoekqhbnrvsr" path="res://scenes/game_logic.tscn" id="3_m55ru"]
@@ -25,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://dq3plcepkbyja" path="res://assets/images/lieutenant.png" id="19_csp53"]
 [ext_resource type="Texture2D" uid="uid://csfnfrse3v08k" path="res://assets/images/spy.png" id="19_vf7oa"]
 [ext_resource type="Theme" uid="uid://cq35288reyfh7" path="res://theme_red.tres" id="24_6ojev"]
+[ext_resource type="PackedScene" uid="uid://c8qtmavbxdvyg" path="res://scenes/ia_basic.tscn" id="25_6ojev"]
 
 [sub_resource type="Theme" id="Theme_86cna"]
 
@@ -40,12 +40,10 @@ datasaver = NodePath("DataSaver")
 spawner = NodePath("Spawner3D")
 map = NodePath("Map")
 minimap = NodePath("MiniMap")
-ia = NodePath("IA")
+ia = NodePath("IA_basic")
 gamelogic = NodePath("GameLogic")
 message_display = NodePath("Message")
 piece_captured_list = NodePath("Piece_captured")
-
-[node name="IA" parent="." unique_id=1023900965 instance=ExtResource("2_6ojev")]
 
 [node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("3_m55ru")]
 
@@ -1065,6 +1063,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yuwle")
 text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="IA_basic" parent="." unique_id=545859194 instance=ExtResource("25_6ojev")]
 
 [connection signal="end_game" from="GameLogic" to="." method="_on_game_logic_end_game"]
 [connection signal="piece_captured" from="GameLogic" to="." method="_on_game_logic_piece_captured"]

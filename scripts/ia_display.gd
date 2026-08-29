@@ -14,7 +14,7 @@ var icon_play = load("res://play.png")
 var icon_pause = load("res://pause.png")
 
 var n_turn = 0
-var current_turn = 1
+var current_turn = 0
 var time_between_change = 0.05
 
 var dict = {}
@@ -49,7 +49,7 @@ func get_number_of_turn():
 	datasaver.close_file()
 	
 func change_current_turn(turn):
-	if turn >=1 and turn <= n_turn:
+	if turn >=0 and turn <= n_turn:
 		current_turn = turn
 		load_turn(current_turn)
 		
@@ -83,7 +83,7 @@ func _on_forward_pressed() -> void:
 
 func _on_turn_count_slider_value_changed(value: float) -> void: 
 	if sliding : 
-		change_current_turn(int(1+value*((n_turn-1)/100.0)))
+		change_current_turn(int(value*((n_turn+1)/100.0)))
 
 func main_loop():
 	while playing : 

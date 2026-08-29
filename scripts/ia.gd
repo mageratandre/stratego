@@ -34,7 +34,7 @@ func random_assign(cells,pieces,player):
 	return dict_placement
 	
 	
-func compute_next_move(player,possible_moves):
+func compute_next_move(player,possible_moves,dict_total):
 	var keys = possible_moves.keys()
 	keys.shuffle()
 	var cell_init = keys[0]

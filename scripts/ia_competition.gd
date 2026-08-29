@@ -1,8 +1,8 @@
 extends Node
 
-var n_game = 300
+var n_game = 1000
 
-@onready var ia_blue = preload("res://scenes/ia.tscn").instantiate() as Node
+@onready var ia_blue = preload("res://scenes/ia_basic.tscn").instantiate() as Node
 @onready var ia_red = preload("res://scenes/ia.tscn").instantiate() as Node
 
 var ia_game_scene = load("res://scenes/IAScene.tscn")
