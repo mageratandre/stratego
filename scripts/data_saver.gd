@@ -44,9 +44,10 @@ func extract_dict_at_position(index: int):
 		elif count == index : 
 			var key = line.split(":")[0] 
 			var cell = Vector3(float(key.split(",")[0].trim_prefix("(")),float(key.split(",")[1]),float(key.split(",")[2].trim_suffix(")")))
-			var piece = int(line.split(":")[1].trim_prefix("[").trim_suffix("]").split(",")[0])
-			var color = int(line.split(":")[1].trim_prefix("[").trim_suffix("]").split(",")[1])
-			dict_temp[cell] = [piece,color]
+			var piece = int(line.split(":")[1].trim_prefix("[").split(",")[0])
+			var color = int(line.split(":")[1].split(",")[1])
+			var revealed = int(line.split(":")[1].trim_suffix("]").split(",")[2])
+			dict_temp[cell] = [piece,color,revealed]
 			
 	return dict_temp
 	

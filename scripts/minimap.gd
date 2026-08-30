@@ -4,9 +4,28 @@ extends Control
 var cells = []
 var bounds = [10,10,-10,-10]   #x_down, z_down, x_up, z_up
 
+enum drawing_mode {ALL,ONLY_SHOWN,RED_SHOWN,BLUE_SHOWN}
+var current_mode
+var last_dict
+
+func _ready() -> void:
+	current_mode = drawing_mode.ALL
+
+func set_drawing_mode(mode):
+	current_mode = mode
+	draw_pieces(last_dict)
+
 func _process(delta: float) -> void:
 	container.size.x = container.size.y
-	
+	if Input.is_action_just_pressed("shown_all"):
+		set_drawing_mode(drawing_mode.ALL)
+	if Input.is_action_just_pressed("show_known"):
+		set_drawing_mode(drawing_mode.ONLY_SHOWN)
+	if Input.is_action_just_pressed("show_blue"):
+		set_drawing_mode(drawing_mode.BLUE_SHOWN)
+	if Input.is_action_just_pressed("show_red"):
+		set_drawing_mode(drawing_mode.RED_SHOWN)
+		
 func add_cell(cell):
 	cells.append(cell)
 	
@@ -43,7 +62,7 @@ func draw_cells():
 			container.add_child(instance)
 			
 func draw_pieces(dict_placement):
-	# le dict est bon
+	last_dict = dict_placement
 	var keys = dict_placement.keys()
 	for cell in cells:
 		var number = (bounds[3]-cell.z)+(cell.x-bounds[0])*(bounds[3]-bounds[1]+1)
@@ -52,7 +71,7 @@ func draw_pieces(dict_placement):
 		if cell not in keys : 
 			style.bg_color = Color(0.0, 0.0, 0.0, 0.0)
 		else : 
-			style.bg_color = set_color(dict_placement[cell][0],dict_placement[cell][1])
+			style.bg_color = set_color(dict_placement[cell][0],dict_placement[cell][1],dict_placement[cell][2])
 		panel.add_theme_stylebox_override("panel", style)
 		
 func get_gradient_double(color1 : Color, color2 : Color, color3 : Color, intervals : int)->Array:
@@ -71,7 +90,33 @@ func get_gradient_simple(color1 : Color, color2 : Color, intervals : int)-> Arra
 		colors.append(Color(c1.r+(c2.r-c1.r)*i/n,c1.g+(c2.g-c1.g)*i/n,c1.b+(c2.b-c1.b)*i/n,1.0))
 	return colors
 	
-func set_color(piece,color)->Color:
+func set_color(piece,color,revealed)->Color:
+	var color_hide = Color(0.628, 1.0, 0.599, 1.0)
+	if current_mode == drawing_mode.ALL : 
+		return set_color_shown(piece,color)
+	elif current_mode == drawing_mode.ONLY_SHOWN:
+		if revealed ==1:
+			return set_color_shown(piece,color)
+		else : 
+			return color_hide
+	elif current_mode == drawing_mode.BLUE_SHOWN : 
+		if color == PieceTypes.color.BLUE:
+			return set_color_shown(piece,color)
+		else :
+			if revealed ==1:
+				return set_color_shown(piece,color)
+			else : 
+				return color_hide
+	else:
+		if color == PieceTypes.color.RED:
+			return set_color_shown(piece,color)
+		else :
+			if revealed ==1:
+				return set_color_shown(piece,color)
+			else : 
+				return color_hide
+		
+func set_color_shown(piece,color)-> Color:
 	var color_0 = Color(0.0, 0.0, 0.0, 1.0)
 	var color_1
 	if color == PieceTypes.color.BLUE : 
@@ -106,5 +151,5 @@ func set_color(piece,color)->Color:
 	elif piece == PieceTypes.types.SPY:
 		return gradient[10]
 	else : 
-		return Color.RED
+		return Color.GREEN
 	

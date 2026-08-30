@@ -30,7 +30,7 @@ func random_assign(cells,pieces,player):
 	var dict_placement = {}
 	for i in range(0,len(cells)):
 		var cell = Vector3(float(cells[i].x), 0.0,float(cells[i].z))
-		dict_placement[cell] = [pieces[i],player]
+		dict_placement[cell] = [pieces[i],player,0]
 	return dict_placement
 	
 	

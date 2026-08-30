@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b0re3m1vr2lsf"]
+
+[ext_resource type="Script" uid="uid://cevtfyvqenpwn" path="res://ia_mid.gd" id="1_2fv6w"]
+[ext_resource type="PackedScene" uid="uid://caoekqhbnrvsr" path="res://scenes/game_logic.tscn" id="2_71uey"]
+
+[node name="IA_mid" type="Node" unique_id=1778817339 node_paths=PackedStringArray("gamelogic")]
+script = ExtResource("1_2fv6w")
+gamelogic = NodePath("GameLogic")
+
+[node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("2_71uey")]

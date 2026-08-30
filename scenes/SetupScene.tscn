@@ -55,13 +55,14 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic7ih"]
 
-[node name="SetupScene" type="Node3D" unique_id=1940889375 node_paths=PackedStringArray("control_ui", "Spawner_3D", "map", "piece_translucent", "minimap", "datasaver", "message_error")]
+[node name="SetupScene" type="Node3D" unique_id=1940889375 node_paths=PackedStringArray("control_ui", "Spawner_3D", "map", "piece_translucent", "minimap", "minimap_rect", "datasaver", "message_error")]
 script = ExtResource("1_si8ln")
 control_ui = NodePath("Control")
 Spawner_3D = NodePath("Spawner3D")
 map = NodePath("Map")
 piece_translucent = NodePath("Piece")
-minimap = NodePath("MiniMap")
+minimap = NodePath("GreyBG/MiniMap")
+minimap_rect = NodePath("GreyBG")
 datasaver = NodePath("DataSaver")
 message_error = NodePath("Message")
 
@@ -596,8 +597,21 @@ texture = ExtResource("12_cl5jp")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="MiniMap" parent="." unique_id=1779216556 instance=ExtResource("17_bn3ql")]
+[node name="GreyBG" type="ColorRect" parent="." unique_id=991388974]
 visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.48805398, 0.48805404, 0.48805404, 1)
+
+[node name="MiniMap" parent="GreyBG" unique_id=1779216556 instance=ExtResource("17_bn3ql")]
+layout_mode = 1
+offset_left = 305.0
+offset_top = 79.0
+offset_right = -280.0
+offset_bottom = -82.0
 
 [node name="Button_exit_scene" type="Button" parent="." unique_id=1286426893]
 anchors_preset = 1

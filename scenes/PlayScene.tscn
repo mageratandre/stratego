@@ -34,16 +34,31 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="PlayScene" type="Node3D" unique_id=294049677 node_paths=PackedStringArray("datasaver", "spawner", "map", "minimap", "ia", "gamelogic", "message_display", "piece_captured_list")]
+[node name="PlayScene" type="Node3D" unique_id=294049677 node_paths=PackedStringArray("datasaver", "spawner", "map", "minimap", "minimap_rect", "ia", "gamelogic", "message_display", "piece_captured_list")]
 script = ExtResource("1_ityjc")
 datasaver = NodePath("DataSaver")
 spawner = NodePath("Spawner3D")
 map = NodePath("Map")
-minimap = NodePath("MiniMap")
+minimap = NodePath("GreyBG/MiniMap")
+minimap_rect = NodePath("GreyBG")
 ia = NodePath("IA_basic")
 gamelogic = NodePath("GameLogic")
 message_display = NodePath("Message")
 piece_captured_list = NodePath("Piece_captured")
+
+[node name="GreyBG" type="ColorRect" parent="." unique_id=1199558486]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 944.0
+offset_top = 437.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.48805398, 0.48805404, 0.48805404, 1)
+
+[node name="MiniMap" parent="GreyBG" unique_id=1779216556 instance=ExtResource("6_w6rf8")]
+layout_mode = 1
 
 [node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("3_m55ru")]
 
@@ -51,9 +66,6 @@ piece_captured_list = NodePath("Piece_captured")
 
 [node name="Player" parent="." unique_id=1816760456 instance=ExtResource("3_21h8x")]
 transform = Transform3D(7.54979e-08, -0.7124244, 0.70174885, 0, 0.70174885, 0.7124244, -1, -5.3786547e-08, 5.2980564e-08, 14.081543, 7.4886475, 0.00013856737)
-
-[node name="MiniMap" parent="." unique_id=1779216556 instance=ExtResource("6_w6rf8")]
-visible = false
 
 [node name="Spawner3D" parent="." unique_id=1420889105 instance=ExtResource("7_0gbdk")]
 
@@ -1069,4 +1081,5 @@ vertical_alignment = 1
 [connection signal="end_game" from="GameLogic" to="." method="_on_game_logic_end_game"]
 [connection signal="piece_captured" from="GameLogic" to="." method="_on_game_logic_piece_captured"]
 [connection signal="piece_move" from="GameLogic" to="." method="_on_game_logic_piece_move"]
+[connection signal="redraw" from="GameLogic" to="." method="_on_game_logic_redraw"]
 [connection signal="pressed" from="Minimap_Button" to="." method="_on_minimap_button_pressed"]

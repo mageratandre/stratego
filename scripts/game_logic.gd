@@ -8,9 +8,11 @@ var dict_main : Dictionary
 var map : Node3D
 var current_player : int
 
-signal piece_move(player,move,dict)
+signal piece_move(player,mvt)
+signal redraw(player,move,dict)
 signal piece_captured(piece1,piece2,winner,tied,cell)
 signal end_game(winner,captured)
+
 
 func set_player(player):
 	self.current_player = player
@@ -67,6 +69,7 @@ func compute_possible_moves(player,dict_piece)-> Dictionary:
 			end_game_function(PieceTypes.color.RED,false)
 		else : 
 			end_game_function(PieceTypes.color.BLUE,false)
+	
 	return dict_p_m
 	
 func get_dict_possible_moves(array)->Dictionary:
@@ -81,6 +84,7 @@ func get_dict_possible_moves(array)->Dictionary:
 func move_piece(player,mvt,dict_main)-> Dictionary:
 	var piece = dict_main[mvt[0]]
 	dict_main.erase(mvt[0])
+	piece_move.emit(player,mvt)
 	if dict_main.has(mvt[1]):
 		var piece_ennemy = dict_main[mvt[1]]
 		var winner = fight(piece,piece_ennemy)
@@ -88,14 +92,17 @@ func move_piece(player,mvt,dict_main)-> Dictionary:
 			dict_main.erase(mvt[1])
 			piece_captured.emit(piece,piece_ennemy,piece,true,mvt[1])
 		else : 
-			dict_main[mvt[1]] = winner
+			dict_main[mvt[1]] = [winner[0],winner[1],1]  #on revele la piece
 			if(piece_ennemy[0] == PieceTypes.types.BANNER):
 				end_game_function(player,true)
 			else : 
 				piece_captured.emit(piece,piece_ennemy,winner,false,mvt[1])
 	else : 
-		dict_main[mvt[1]] = piece
-	piece_move.emit(player,mvt,dict_main)
+		if(mvt[0].x != mvt[1].x +1.0 and mvt[0].x != mvt[1].x -1.0 and mvt[0].z != mvt[1].z +1.0 and mvt[0].z != mvt[1].z -1.0):
+			dict_main[mvt[1]] = [piece[0],piece[1],1] #on revele le scout
+		else : 
+			dict_main[mvt[1]] = piece
+	redraw.emit(player,mvt,dict_main)
 	current_player = get_ennemy_player(player)
 	return dict_main
 	

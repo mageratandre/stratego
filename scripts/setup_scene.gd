@@ -5,6 +5,7 @@ extends Node3D
 @export var map : Node3D
 @export var piece_translucent : Area3D
 @export var minimap : Control
+@export var minimap_rect : ColorRect
 @export var datasaver : Node
 
 @export var message_error : Control
@@ -61,9 +62,9 @@ func place_piece():
 	else : 
 		
 		if(max_number_per_piece[type_selected]>0):  #s'il en reste
-			dict_placement[cell_selected] = [type_selected, PieceTypes.color.BLUE]
+			dict_placement[cell_selected] = [type_selected, PieceTypes.color.BLUE, 0]
 			var pos = map.get_global(cell_selected)
-			Spawner_3D.create(type_selected,pos.x,pos.z,cell_selected,PieceTypes.color.BLUE,false)
+			Spawner_3D.create(type_selected,pos.x,pos.z,cell_selected,PieceTypes.color.BLUE,0)
 			max_number_per_piece[type_selected] -=1
 				
 		else : 
@@ -105,10 +106,10 @@ func _on_button_load_data_pressed() -> void:
 	
 
 func _on_button_show_grid_pressed() -> void:
-	if minimap.visible : 
-		minimap.hide()
+	if minimap_rect.visible : 
+		minimap_rect.hide()
 	else:
-		minimap.show()
+		minimap_rect.show()
 		
 func change_scene():
 	var setup_scene = get_tree().current_scene

@@ -1,8 +1,9 @@
-extends IA
+class_name IA_basic extends IA
 
 var free_cells_left : Array
 var free_pieces_left : Array
 var heatmap : Array
+var cell_flag
 
 var dict_setup
 	
@@ -20,38 +21,45 @@ func basic_assign(map,cells,pieces,player) :
 	heatmap = cell_heatmap_x(cells)
 	
 	#on place le drapeau sur la dernière ligne sur une case au hasard
+	flag_on_last_line(player)
+	
+	#on met des bombes tout autour
+	bomb_around_flag(map,player)
+	
+	#on place le reste des pieces au hasard
+	rest_of_piece_random(player)
+	
+	return dict_setup
+
+func place_piece(piece,_cell,player):
+	var cell_good_format = Vector3(float(_cell.x), 0.0,float(_cell.z))
+	dict_setup[cell_good_format] = [piece,player,0]
+	var i = free_cells_left.find(_cell)
+	heatmap.remove_at(i)
+	free_pieces_left.erase(piece)
+	free_cells_left.erase(_cell)
+
+func flag_on_last_line(player):
 	var cells_last_line = []
 	for i in range(0,len(heatmap)):
 		if heatmap[i]==1.0:
 			cells_last_line.append(free_cells_left[i])
 	cells_last_line.shuffle()
-	var cell_flag = cells_last_line[0]
+	cell_flag = cells_last_line[0]
 	place_piece(PieceTypes.types.BANNER,cell_flag,player)
 	
-	#on met des bombes tout autour
+func bomb_around_flag(map,player) : 
 	var dict_neighbour = map.get_dict_neighbours()
 	var cells_bomb = dict_neighbour[Vector3(float(cell_flag.x), 0.0,float(cell_flag.z))].values()
 	for cell in cells_bomb:
 		var cell_bad_format = Vector3i(int(cell.x),int(0.0),int(cell.z))
 		place_piece(PieceTypes.types.BOMB,cell_bad_format,player)
 	
-	#on place le reste des pieces au hasard
+func rest_of_piece_random(player):
 	free_pieces_left.shuffle()
 	while(len(free_pieces_left)>0):
 		place_piece(free_pieces_left[0],free_cells_left[0],player)
 	
-	return dict_setup
-
-	
-func place_piece(piece,_cell,player):
-	var cell_good_format = Vector3(float(_cell.x), 0.0,float(_cell.z))
-	dict_setup[cell_good_format] = [piece,player]
-	var i = free_cells_left.find(_cell)
-	heatmap.remove_at(i)
-	free_pieces_left.erase(piece)
-	free_cells_left.erase(_cell)
-
-
 func cell_heatmap_x(cells):
 	var x_max = abs(cells[0].x)
 	var x_min = abs(cells[0].x)
@@ -75,7 +83,7 @@ func compute_next_move(player,possible_moves,dict_total):
 	else : 
 		cells_init.sort_custom(func(a, b): return a.x < b.x)
 	if len(cells_init)>1 : 
-		cells_init.resize(len(cells_init)/4)
+		cells_init.resize(len(cells_init)/2)
 	cells_init.shuffle()
 	var cell_init = cells_init[0]
 
@@ -94,6 +102,3 @@ func compute_next_move(player,possible_moves,dict_total):
 	cells_dest.shuffle()
 	var cell_dest = cells_dest[0]
 	return[cell_init,cell_dest]
-
-	
-		

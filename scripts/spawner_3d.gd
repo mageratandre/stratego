@@ -11,7 +11,7 @@ func create(type,x,z,cell, color,known):
 	instance.set_color(color)
 	if color == PieceTypes.color.RED : 
 		instance.set_rot(180.0)
-	if known :
+	if known == 1 and color == PieceTypes.color.RED:
 		instance.rotation_degrees.y +=180
 	add_child(instance)
 	
