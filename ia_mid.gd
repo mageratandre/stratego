@@ -61,9 +61,9 @@ func compute_next_move(player,possible_moves,dict_total):
 					points.append(-1)
 			else : 
 				if dict_total[move[0]][0] == PieceTypes.types.SCOUT or dict_total[move[0]][0] == PieceTypes.types.SERGEANT:
-					points.append(0.1)
+					points.append(0.5)
 				else : 
-					points.append(0)
+					points.append(0.01)
 					
 		# check si on peut arriver à une victoire garantie
 		else : 
@@ -76,6 +76,7 @@ func compute_next_move(player,possible_moves,dict_total):
 						if winner[1]==player : 
 							var path = astar_grid.get_point_path(Vector2i(move[1].x,move[1].y),Vector2i(cell.x,cell.y))
 							if len(path)>0:
+								print(path)
 								weights.append(2.0*(1.0/float(len(path))))
 							else : 
 								weights.append(0)
@@ -88,10 +89,10 @@ func compute_next_move(player,possible_moves,dict_total):
 			points.append(weights.max())
 		
 		if player == PieceTypes.color.BLUE : 
-			if move[0].x < move[1].x:
+			if move[0].x > move[1].x:
 				points[-1]+=0.01 
 		else :
-			if move[0].x > move[1].x:
+			if move[0].x < move[1].x:
 				points[-1]+=0.01 
 	var best_moves = []
 	

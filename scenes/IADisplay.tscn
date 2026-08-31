@@ -8,8 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://cki80ab1itlb1" path="res://arrow_left.png" id="6_0nh4f"]
 [ext_resource type="Texture2D" uid="uid://dsv5kkqpo6rrm" path="res://play.png" id="7_03x2m"]
 [ext_resource type="Texture2D" uid="uid://bqq7dwx4b0pfb" path="res://arrow.png" id="8_puhil"]
+[ext_resource type="Script" uid="uid://y6smi2mxhlid" path="res://scripts/live_label.gd" id="9_0nh4f"]
 
-[node name="IADisplay" type="Control" unique_id=1336850252 node_paths=PackedStringArray("minimap", "datasaver", "map", "play_pause_button", "turn_display_label", "turn_slider")]
+[sub_resource type="LabelSettings" id="LabelSettings_6ank4"]
+font_size = 27
+font_color = Color(1, 0, 0, 1)
+
+[node name="IADisplay" type="Control" unique_id=1336850252 node_paths=PackedStringArray("minimap", "datasaver", "map", "play_pause_button", "turn_display_label", "turn_slider", "live_text")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +28,7 @@ map = NodePath("Map")
 play_pause_button = NodePath("PlayMode/HBoxContainer/Play_Pause")
 turn_display_label = NodePath("PlayMode/HBoxContainer/Turn")
 turn_slider = NodePath("PlayMode/HBoxContainer/Turn_count_slider")
+live_text = NodePath("Live_label")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=624479248]
 layout_mode = 1
@@ -101,6 +107,24 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 1
 step = 0.001
+
+[node name="Live_label" type="Label" parent="." unique_id=1129599555]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "LIVE"
+label_settings = SubResource("LabelSettings_6ank4")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_0nh4f")
 
 [connection signal="pressed" from="PlayMode/HBoxContainer/Backward" to="." method="_on_backward_pressed"]
 [connection signal="pressed" from="PlayMode/HBoxContainer/Play_Pause" to="." method="_on_play_pause_pressed"]

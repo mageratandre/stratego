@@ -3,13 +3,15 @@
 [ext_resource type="Script" uid="uid://dqif8hnbsxx1f" path="res://scripts/i_avs_ia_scene.gd" id="1_fst12"]
 [ext_resource type="PackedScene" uid="uid://caoekqhbnrvsr" path="res://scenes/game_logic.tscn" id="2_gl2jd"]
 [ext_resource type="PackedScene" uid="uid://cv7qalwedgewc" path="res://scenes/map.tscn" id="4_hgj3n"]
+[ext_resource type="PackedScene" uid="uid://bb83xyftab2yq" path="res://scenes/IADisplay.tscn" id="5_0cuf1"]
 [ext_resource type="PackedScene" uid="uid://dno1ajaofe8eh" path="res://scenes/data_saver.tscn" id="5_gl2jd"]
 
-[node name="IAvsIAScene" type="Node" unique_id=941691256 node_paths=PackedStringArray("gamelogic", "map", "datasaver")]
+[node name="IAvsIAScene" type="Node" unique_id=941691256 node_paths=PackedStringArray("gamelogic", "map", "datasaver", "ia_display")]
 script = ExtResource("1_fst12")
 gamelogic = NodePath("GameLogic")
 map = NodePath("Map")
 datasaver = NodePath("DataSaver")
+ia_display = NodePath("IADisplay")
 
 [node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("2_gl2jd")]
 
@@ -17,6 +19,8 @@ datasaver = NodePath("DataSaver")
 visible = false
 
 [node name="DataSaver" parent="." unique_id=1777036214 instance=ExtResource("5_gl2jd")]
+
+[node name="IADisplay" parent="." unique_id=1336850252 instance=ExtResource("5_0cuf1")]
 
 [connection signal="end_game" from="GameLogic" to="." method="_on_game_logic_end_game"]
 [connection signal="piece_captured" from="GameLogic" to="." method="_on_game_logic_piece_captured"]

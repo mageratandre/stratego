@@ -4,6 +4,7 @@ extends Node
 @export var gamelogic : Node
 @export var map : Node3D
 @export var datasaver : Node
+@export var ia_display : IADisplay
 
 var pieces = [1,6,1,1,1,2,3,4,4,4,5,8]
 
@@ -24,6 +25,8 @@ func _ready() -> void:
 	set_param(PieceTypes.color.BLUE,true,"res://save_game_ia.txt", 
 	load("res://scenes/ia.tscn").instantiate(),
 	load("res://scenes/ia_mid.tscn").instantiate())
+	ia_display.set_mode(1)
+	ia_display.init()
 	new_game()
 
 func set_param(_first_player, _saving, _filename, _ia_red, _ia_blue) -> void:
@@ -46,11 +49,17 @@ func new_game():
 	gamelogic.set_dict(dict_total)
 	saver("save")
 	while !gamelogic.get_finished():
+		
+		ia_display.set_dict(dict_total)
+		ia_display.load_turn(turn_count)
+		
 		if gamelogic.get_player() == PieceTypes.color.BLUE:
 			one_turn(PieceTypes.color.BLUE)
 		else :
 			one_turn(PieceTypes.color.RED)
 		update_stat()
+		
+		await ia_display.next_turn
 
 func one_turn(player) : 
 	var possible_moves = gamelogic.compute_possible_moves(player,dict_total)
