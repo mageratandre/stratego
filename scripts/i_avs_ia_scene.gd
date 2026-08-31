@@ -19,13 +19,12 @@ var ia_red
 var ia_blue
 
 var dict_total
-"""
+
 func _ready() -> void:
 	set_param(PieceTypes.color.BLUE,true,"res://save_game_ia.txt", 
 	load("res://scenes/ia.tscn").instantiate(),
 	load("res://scenes/ia_mid.tscn").instantiate())
 	new_game()
-"""
 
 func set_param(_first_player, _saving, _filename, _ia_red, _ia_blue) -> void:
 	
