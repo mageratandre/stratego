@@ -47,18 +47,20 @@ message_display = NodePath("Message")
 piece_captured_list = NodePath("Piece_captured")
 
 [node name="GreyBG" type="ColorRect" parent="." unique_id=1199558486]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 944.0
-offset_top = 437.0
-offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.48805398, 0.48805404, 0.48805404, 1)
 
 [node name="MiniMap" parent="GreyBG" unique_id=1779216556 instance=ExtResource("6_w6rf8")]
 layout_mode = 1
+offset_left = 371.0
+offset_top = 68.0
+offset_right = -232.0
+offset_bottom = -65.0
 
 [node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("3_m55ru")]
 

@@ -72,7 +72,53 @@ func draw_pieces(dict_placement):
 			style.bg_color = Color(0.0, 0.0, 0.0, 0.0)
 		else : 
 			style.bg_color = set_color(dict_placement[cell][0],dict_placement[cell][1],dict_placement[cell][2])
+			add_tooltip(panel,dict_placement[cell][0],dict_placement[cell][1],dict_placement[cell][2])
 		panel.add_theme_stylebox_override("panel", style)
+
+		
+
+func add_tooltip(panel, type,color,revealed):
+	var text = get_name_piece(type)
+	panel.tooltip_text = ""
+	if current_mode == drawing_mode.ALL:
+		panel.tooltip_text = text
+	elif current_mode == drawing_mode.ONLY_SHOWN : 
+		if revealed == 1:
+			panel.tooltip_text = text
+	elif current_mode == drawing_mode.RED_SHOWN : 
+		if color == PieceTypes.color.RED or revealed == 1 : 
+			panel.tooltip_text = text
+	elif current_mode == drawing_mode.BLUE_SHOWN : 
+		if color == PieceTypes.color.BLUE or revealed == 1 : 
+			panel.tooltip_text = text
+	
+func get_name_piece(piece_int) -> String:
+	
+	if piece_int == PieceTypes.types.MARSHAL:
+		return "Marshal (10)"
+	elif piece_int == PieceTypes.types.BANNER:
+		return "Banner (0)"
+	elif piece_int == PieceTypes.types.BOMB:
+		return "Bomb (11)"
+	elif piece_int == PieceTypes.types.CAPTAIN:
+		return "Captain (6)"
+	elif piece_int == PieceTypes.types.COLONEL:
+		return "Colonel (8)"
+	elif piece_int == PieceTypes.types.GENERAL:
+		return "General (9)"
+	elif piece_int == PieceTypes.types.LIEUTENANT:
+		return "Lieutenant (5)"
+	elif piece_int == PieceTypes.types.MAJOR:
+		return "Major (7)"
+	elif piece_int == PieceTypes.types.MINER:
+		return "Miner (3)"
+	elif piece_int == PieceTypes.types.SCOUT:
+		return "Scout (2)"
+	elif piece_int == PieceTypes.types.SPY:
+		return "Spy (1)"
+	else:
+		return "Sergeant (4)"
+	
 		
 func get_gradient_double(color1 : Color, color2 : Color, color3 : Color, intervals : int)->Array:
 	var array1 = get_gradient_simple(color1,color2,intervals/2)

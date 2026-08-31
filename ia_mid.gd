@@ -76,6 +76,7 @@ func compute_next_move(player,possible_moves,dict_total):
 						if winner[1]==player : 
 							var path = astar_grid.get_point_path(Vector2i(move[1].x,move[1].y),Vector2i(cell.x,cell.y))
 							if len(path)>0:
+								print("piece "+str(dict_total[move[0]])+" va vers "+str(dict_total[cell]))
 								print(path)
 								weights.append(2.0*(1.0/float(len(path))))
 							else : 
