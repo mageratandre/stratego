@@ -15,16 +15,16 @@ var piece_captured = 0
 var current_player 
 
 var saving
-var save_file 
+var save_file
 var ia_red
 var ia_blue
 
 var dict_total
 
 func _ready() -> void:
-	set_param(PieceTypes.color.BLUE,true,"res://save_game_ia.txt", 
-	load("res://scenes/ia.tscn").instantiate(),
-	load("res://scenes/ia_mid.tscn").instantiate())
+	set_param(PieceTypes.color.BLUE,true,"res://save_file_ia.dat", 
+	load("res://scenes/logic_scenes/ia.tscn").instantiate(),
+	load("res://scenes/logic_scenes/ia_mid.tscn").instantiate())
 	ia_display.set_mode(1)
 	ia_display.init()
 	new_game()
@@ -91,7 +91,7 @@ func get_turn_total():
 func saver(MODE):
 	if(saving):
 		if MODE =="open":
-			datasaver.open_file(save_file, FileAccess.READ_WRITE)
+			datasaver.open_file(save_file, FileAccess.WRITE)
 		elif MODE == "save":
 			datasaver.write_dict(dict_total)
 		elif MODE == "close":

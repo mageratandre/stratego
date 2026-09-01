@@ -8,29 +8,29 @@ var type
 func set_icon(type):
 	
 	if(type == PieceTypes.types.BANNER):
-		icon.texture_albedo = load("res://assets/images/banner.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/banner.png")
 	if(type == PieceTypes.types.BOMB):
-		icon.texture_albedo = load("res://assets/images/bomb.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/bomb.png")
 	if(type == PieceTypes.types.CAPTAIN):
-		icon.texture_albedo = load("res://assets/images/captain.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/captain.png")
 	if(type == PieceTypes.types.COLONEL):
-		icon.texture_albedo = load("res://assets/images/colonel.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/colonel.png")
 	if(type == PieceTypes.types.GENERAL):
-		icon.texture_albedo = load("res://assets/images/general.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/general.png")
 	if(type == PieceTypes.types.LIEUTENANT):
-		icon.texture_albedo = load("res://assets/images/lieutenant.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/lieutenant.png")
 	if(type == PieceTypes.types.MAJOR):
-		icon.texture_albedo = load("res://assets/images/major.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/major.png")
 	if(type == PieceTypes.types.MARSHAL):
-		icon.texture_albedo = load("res://assets/images/marshal.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/marshal.png")
 	if(type == PieceTypes.types.MINER):
-		icon.texture_albedo = load("res://assets/images/miner.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/miner.png")
 	if(type == PieceTypes.types.SCOUT):
-		icon.texture_albedo = load("res://assets/images/scout.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/scout.png")
 	if(type == PieceTypes.types.SERGEANT):
-		icon.texture_albedo = load("res://assets/images/sergeant.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/sergeant.png")
 	if(type == PieceTypes.types.SPY):
-		icon.texture_albedo = load("res://assets/images/spy.png")
+		icon.texture_albedo = load("res://assets/icon_pieces/spy.png")
 		
 func set_cell(cell):
 	self.cell = cell

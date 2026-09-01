@@ -16,6 +16,8 @@ var cell_active = null
 var time_to_wait = 1
 var mvt = []
 
+var save_file = "res://save_file.dat"
+
 signal mvt_picked
 
 var dict_total
@@ -57,7 +59,7 @@ func new_game():
 		
 func creation_dict_total()-> Dictionary:
 	dict_total = {}
-	var dict_player = datasaver.load_dict("res://save_game.txt")
+	var dict_player = datasaver.load_dict(save_file)
 	for key in dict_player.keys():
 		dict_total[key] = dict_player[key]
 	var dict_ia = ia.setup(map, [1,6,1,1,1,2,3,4,4,4,5,8],PieceTypes.color.RED)

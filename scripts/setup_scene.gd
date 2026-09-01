@@ -15,6 +15,8 @@ var dict_placement = {}
 var type_selected
 var cell_selected
 
+var save_file = "res://save_file.dat"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	control_ui.spawn.connect(set_type)
@@ -81,7 +83,7 @@ func _on_button_exit_scene_pressed() -> void:
 		if(number != 0):
 			all_empty = false
 	if all_empty:
-		datasaver.save_dict("res://save_game.txt",dict_placement)
+		datasaver.save_dict(save_file,dict_placement)
 		message_error.message("Let's play !")
 		change_scene()
 	else : 
@@ -96,7 +98,7 @@ func _on_button_load_data_pressed() -> void:
 		cell_selected = key
 		place_piece()
 	#ensuite on charge le dictionnaire
-	var dict_temp = datasaver.load_dict("res://save_game.txt")
+	var dict_temp = datasaver.load_dict(save_file)
 	keys = dict_temp.keys()
 	for key in keys:
 		set_type(dict_temp[key][0])
@@ -113,7 +115,7 @@ func _on_button_show_grid_pressed() -> void:
 		
 func change_scene():
 	var setup_scene = get_tree().current_scene
-	var new_scene = load("res://scenes/PlayScene.tscn").instantiate()
+	var new_scene = load("res://scenes/Main_scenes/PlayScene.tscn").instantiate()
 	setup_scene.add_sibling(new_scene)
 	setup_scene.queue_free()
 	

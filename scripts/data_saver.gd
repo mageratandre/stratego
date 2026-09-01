@@ -6,9 +6,7 @@ func open_file(filename,access):
 	file = FileAccess.open(filename, access)
 	
 func write_dict(dict):
-	for i in dict.size():
-		file.store_line(str(dict.keys()[i],":",dict.values()[i],"\r").replace(" ","")) 
-	file.store_line("end :")
+	file.store_var(dict,true)
 	
 func close_file():
 	file.close()
@@ -21,35 +19,33 @@ func save_dict(filename,dict_placement):
 func load_dict(filename) -> Dictionary:
 	open_file(filename,FileAccess.READ) #faire en sorte de ne lire qu'un dict
 	var dict = extract_dict()
-	file.close()
+	print(dict)
+	close_file()
 	return dict
 	
-func get_number_of_turn() -> int:
-	var turn_count = file.get_as_text().count("end :")
+func get_number_of_turn(filename) -> int:
+	var turn_count = 0
+	
+	while file.get_position() != file.get_size(filename) :
+		file.get_var(true)
+		turn_count +=1
+		
+	close_file()
+	open_file(filename,FileAccess.READ)
+	
 	return turn_count
 	
 func extract_dict():
-	var dict = extract_dict_at_position(0)
+	var dict = extract_dict_at_position(1)
 	return dict
 
 
 func extract_dict_at_position(index: int):
-	var dict_temp = {} as Dictionary
-	var count = 0
-
-	for i in file.get_as_text().count(":"):
-		var line = file.get_line()
-		if line == "end :":
-			count +=1
-		elif count == index : 
-			var key = line.split(":")[0] 
-			var cell = Vector3(float(key.split(",")[0].trim_prefix("(")),float(key.split(",")[1]),float(key.split(",")[2].trim_suffix(")")))
-			var piece = int(line.split(":")[1].trim_prefix("[").split(",")[0])
-			var color = int(line.split(":")[1].split(",")[1])
-			var revealed = int(line.split(":")[1].trim_suffix("]").split(",")[2])
-			dict_temp[cell] = [piece,color,revealed]
+	var content
+	for i in range(0,index):
+		content = file.get_var(true)
 			
-	return dict_temp
+	return content
 	
 	
 	

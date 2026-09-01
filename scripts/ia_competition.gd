@@ -3,10 +3,10 @@ extends Node
 var n_game = 100
 var current_game = 0
 
-@onready var ia_blue = preload("res://scenes/ia_basic.tscn").instantiate() as Node
-@onready var ia_red = preload("res://scenes/ia.tscn").instantiate() as Node
+@onready var ia_blue = preload("res://scenes/logic_scenes/ia_basic.tscn").instantiate() as Node
+@onready var ia_red = preload("res://scenes/logic_scenes/ia.tscn").instantiate() as Node
 
-var ia_game_scene = load("res://scenes/IAScene.tscn")
+var ia_game_scene = load("res://scenes/Main_scenes/IAScene.tscn")
 
 var win_blue = 0
 	

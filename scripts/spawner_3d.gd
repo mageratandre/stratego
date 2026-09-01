@@ -1,7 +1,7 @@
 extends Node3D
 	
 func create(type,x,z,cell, color,known):
-	var scene = load("res://scenes/piece.tscn")
+	var scene = load("res://scenes/visual_scenes/piece.tscn")
 	var instance = scene.instantiate()
 	instance.position.x = x
 	instance.position.z = z

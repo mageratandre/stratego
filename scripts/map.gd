@@ -21,7 +21,7 @@ func _ready() -> void:
 func fill_container(unused):
 	for cell in ground_tiles.get_used_cells():
 		if cell not in unused:
-			var scene = load("res://scenes/clickable_area.tscn")
+			var scene = load("res://scenes/visual_scenes/clickable_area.tscn")
 			var instance = scene.instantiate()
 			instance.position.x = 2*cell.x + ground_tiles.cell_size.x/2
 			instance.position.z = 2*cell.z + ground_tiles.cell_size.z/2

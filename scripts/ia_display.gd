@@ -11,14 +11,14 @@ class_name IADisplay extends Control
 @export var live_text : Label
 
 
-var file_to_read = "res://save_game_ia.txt" 
+var file_to_read = "res://save_file_ia.dat"
 
-var icon_play = load("res://play.png")
-var icon_pause = load("res://pause.png")
+var icon_play = load("res://assets/images/play.png")
+var icon_pause = load("res://assets/images/pause.png")
 
 var n_turn = 0
 var current_turn = 0
-var time_between_change = 0.05
+var time_between_change = 0.005
 
 enum mode {FROM_FILE,LIVE}
 var current_mode
@@ -47,6 +47,7 @@ func init():
 	
 	if current_mode == mode.FROM_FILE:
 		get_number_of_turn()
+		print(n_turn)
 		turn_display_label.text = str(current_turn)+"/"+str(n_turn)
 	
 		load_turn(current_turn)
@@ -59,7 +60,7 @@ func init():
 func load_turn(index : int):
 	if current_mode == mode.FROM_FILE : 
 		datasaver.open_file(file_to_read, FileAccess.READ)
-		dict = datasaver.extract_dict_at_position(index)
+		dict = datasaver.extract_dict_at_position(index+1)
 		datasaver.close_file()
 		
 	minimap.draw_pieces(dict)
@@ -69,7 +70,7 @@ func load_turn(index : int):
 
 func get_number_of_turn():
 	datasaver.open_file(file_to_read, FileAccess.READ)
-	n_turn = datasaver.get_number_of_turn()-1
+	n_turn = datasaver.get_number_of_turn(file_to_read)-1
 	datasaver.close_file()
 	
 func change_current_turn(turn):

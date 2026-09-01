@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cpxjjjfmwu77s"]
+
+[ext_resource type="Script" uid="uid://c7p2ci6k22ah8" path="res://scripts/piece.gd" id="1_m0mde"]
+[ext_resource type="ArrayMesh" uid="uid://cqugbct05nfh6" path="res://assets/3d_ressources/piece.tres" id="1_s58gp"]
+[ext_resource type="ArrayMesh" uid="uid://bjvhguq0p82ra" path="res://assets/3d_ressources/image.tres" id="2_h2rng"]
+[ext_resource type="Texture2D" uid="uid://c05exbiqkbsuc" path="res://assets/icon_pieces/banner.png" id="3_h2rng"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic7ih"]
+
+[node name="Piece" type="Area3D" unique_id=1764085237 node_paths=PackedStringArray("icon", "tower")]
+script = ExtResource("1_m0mde")
+icon = NodePath("Face/Decal")
+tower = NodePath("Tower")
+
+[node name="Tower" type="MeshInstance3D" parent="." unique_id=371189031]
+mesh = ExtResource("1_s58gp")
+
+[node name="Face" type="MeshInstance3D" parent="." unique_id=355214729]
+layers = 2
+mesh = ExtResource("2_h2rng")
+surface_material_override/0 = SubResource("StandardMaterial3D_ic7ih")
+
+[node name="Decal" type="Decal" parent="Face" unique_id=541659405]
+transform = Transform3D(0.08022201, 0.4955415, 0.09001675, 0.083458304, 0.07681205, -0.49722692, -0.4966882, 0.09294348, -0.06900988, 0.653, 0.844, 0)
+layers = 2
+texture_albedo = ExtResource("3_h2rng")
+upper_fade = 0.029421845
+lower_fade = 0.0043735607
+cull_mask = 1048574
