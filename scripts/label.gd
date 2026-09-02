@@ -4,7 +4,7 @@ func set_default() :
 	set_tooltip("")
 	set_texte("")
 	set_color(Color(0.0, 0.0, 0.0, 0.0))
-	
+
 func set_color(color):
 	var style = get_theme_stylebox("normal").duplicate() as StyleBoxFlat
 	style.bg_color = color

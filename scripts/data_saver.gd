@@ -19,7 +19,6 @@ func save_dict(filename,dict_placement):
 func load_dict(filename) -> Dictionary:
 	open_file(filename,FileAccess.READ) #faire en sorte de ne lire qu'un dict
 	var dict = extract_dict()
-	print(dict)
 	close_file()
 	return dict
 	

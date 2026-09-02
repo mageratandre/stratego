@@ -63,6 +63,7 @@ func draw_cells():
 			container.add_child(instance)
 			
 func draw_pieces(dict_placement):
+	print(dict_placement)
 	last_dict = dict_placement
 	var keys = dict_placement.keys()
 	for cell in cells:
