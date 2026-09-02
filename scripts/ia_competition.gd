@@ -1,34 +1,36 @@
 extends Node
 
-var n_game = 100
+var n_game = 10
+var turn_count = 0
 var current_game = 0
+var ref_to_game
 
-@onready var ia_blue = preload("res://scenes/logic_scenes/ia_basic.tscn").instantiate() as Node
-@onready var ia_red = preload("res://scenes/logic_scenes/ia.tscn").instantiate() as Node
 
-var ia_game_scene = load("res://scenes/Main_scenes/IAScene.tscn")
+@onready var ia_blue = preload("res://scenes/logic_scenes/ia_mid.tscn").instantiate() as Node
+@onready var ia_red = preload("res://scenes/logic_scenes/ia_basic.tscn").instantiate() as Node
+
+@export var game : Node
 
 var win_blue = 0
 	
 func new_competition():
-	current_game = 0
-	var turn_count = 0
-	win_blue = 0
+	
 	while current_game != n_game:
-		var instance = ia_game_scene.instantiate()
-		add_child(instance)
-		instance.set_param(PieceTypes.color.BLUE, false, null, ia_red, ia_blue)
-		instance.new_game()
-		if instance.get_winner()== PieceTypes.color.BLUE:
-			win_blue +=1
-		turn_count += instance.get_turn_total()
-		instance.queue_free()
-		current_game+=1
-		print(current_game)
-		
-		
+		game.new_game()
+		await game.game_ended
+		update_and_pursue()
+
 	print("Pourcentage de win de bleu : " + str(float(win_blue)/float(n_game)))
 	print("Nombre de tour moyen : "+str(float(turn_count)/float(n_game)))
 
-func _on_button_pressed() -> void:
+func update_and_pursue() : 
+	
+	if game.get_winner()== PieceTypes.color.BLUE:
+		win_blue += 1
+	turn_count += ref_to_game.get_turn_total()
+	current_game += 1
+	
+func _ready() -> void:
+
+	game.set_param(PieceTypes.color.BLUE, false, null, ia_red, ia_blue)
 	new_competition()

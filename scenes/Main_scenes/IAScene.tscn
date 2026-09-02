@@ -3,15 +3,30 @@
 [ext_resource type="Script" uid="uid://dqif8hnbsxx1f" path="res://scripts/i_avs_ia_scene.gd" id="1_fst12"]
 [ext_resource type="PackedScene" uid="uid://caoekqhbnrvsr" path="res://scenes/logic_scenes/game_logic.tscn" id="2_gl2jd"]
 [ext_resource type="PackedScene" uid="uid://cv7qalwedgewc" path="res://scenes/visual_scenes/map.tscn" id="4_hgj3n"]
-[ext_resource type="PackedScene" uid="uid://bb83xyftab2yq" path="res://scenes/visual_scenes/IADisplay.tscn" id="5_0cuf1"]
+[ext_resource type="PackedScene" uid="uid://uh7c2iw0lwy8" path="res://scenes/visual_scenes/ui_game_player.tscn" id="5_dwcou"]
 [ext_resource type="PackedScene" uid="uid://dno1ajaofe8eh" path="res://scenes/logic_scenes/data_saver.tscn" id="5_gl2jd"]
+[ext_resource type="PackedScene" uid="uid://3esk1jvf3ecb" path="res://scenes/visual_scenes/minimap.tscn" id="6_nhxm6"]
+[ext_resource type="Script" uid="uid://y6smi2mxhlid" path="res://scripts/live_label.gd" id="7_nhxm6"]
 
-[node name="IAvsIAScene" type="Node" unique_id=941691256 node_paths=PackedStringArray("gamelogic", "map", "datasaver", "ia_display")]
+[sub_resource type="LabelSettings" id="LabelSettings_vvfq3"]
+font_size = 27
+font_color = Color(1, 0, 0, 1)
+
+[node name="IAvsIAScene" type="Node" unique_id=941691256 node_paths=PackedStringArray("gamelogic", "map", "datasaver", "UI", "minimap")]
 script = ExtResource("1_fst12")
 gamelogic = NodePath("GameLogic")
 map = NodePath("Map")
 datasaver = NodePath("DataSaver")
-ia_display = NodePath("IADisplay")
+UI = NodePath("UI")
+minimap = NodePath("MiniMap")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=970576376]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5963672, 0.59636724, 0.59636724, 1)
 
 [node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("2_gl2jd")]
 
@@ -20,7 +35,29 @@ visible = false
 
 [node name="DataSaver" parent="." unique_id=1777036214 instance=ExtResource("5_gl2jd")]
 
-[node name="IADisplay" parent="." unique_id=1336850252 instance=ExtResource("5_0cuf1")]
+[node name="UI" parent="." unique_id=1033226781 instance=ExtResource("5_dwcou")]
+
+[node name="MiniMap" parent="." unique_id=1779216556 instance=ExtResource("6_nhxm6")]
+offset_left = 241.0
+offset_top = 91.0
+offset_right = -329.0
+offset_bottom = -39.0
+
+[node name="Live_label" type="Label" parent="." unique_id=1961020054]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "LIVE"
+label_settings = SubResource("LabelSettings_vvfq3")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_nhxm6")
 
 [connection signal="end_game" from="GameLogic" to="." method="_on_game_logic_end_game"]
 [connection signal="piece_captured" from="GameLogic" to="." method="_on_game_logic_piece_captured"]

@@ -9,11 +9,10 @@ var current_mode
 var last_dict
 
 func _ready() -> void:
-	current_mode = drawing_mode.ALL
+	current_mode = drawing_mode.BLUE_SHOWN
 
 func set_drawing_mode(mode):
 	current_mode = mode
-	print(mode)
 	draw_pieces(last_dict)
 
 func _process(delta: float) -> void:
@@ -63,7 +62,6 @@ func draw_cells():
 			container.add_child(instance)
 			
 func draw_pieces(dict_placement):
-	print(dict_placement)
 	last_dict = dict_placement
 	var keys = dict_placement.keys()
 	for cell in cells:

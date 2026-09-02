@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bb83xyftab2yq"]
+
+[ext_resource type="Script" uid="uid://b3m45gkkdk7nr" path="res://scripts/ia_display.gd" id="1_6tjww"]
+[ext_resource type="PackedScene" uid="uid://3esk1jvf3ecb" path="res://scenes/visual_scenes/minimap.tscn" id="2_317l7"]
+[ext_resource type="PackedScene" uid="uid://dno1ajaofe8eh" path="res://scenes/logic_scenes/data_saver.tscn" id="3_r533b"]
+[ext_resource type="PackedScene" uid="uid://cv7qalwedgewc" path="res://scenes/visual_scenes/map.tscn" id="4_5en1g"]
+[ext_resource type="PackedScene" uid="uid://uh7c2iw0lwy8" path="res://scenes/visual_scenes/ui_game_player.tscn" id="5_8fhae"]
+
+[node name="IADisplay" type="Control" unique_id=1336850252 node_paths=PackedStringArray("minimap", "datasaver", "map", "UI")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6tjww")
+minimap = NodePath("MiniMap")
+datasaver = NodePath("DataSaver")
+map = NodePath("Map")
+UI = NodePath("UI")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=624479248]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5963672, 0.59636724, 0.59636724, 1)
+
+[node name="MiniMap" parent="." unique_id=1779216556 instance=ExtResource("2_317l7")]
+layout_mode = 1
+offset_left = 222.0
+offset_top = 86.0
+offset_right = -293.0
+offset_bottom = -42.0
+
+[node name="DataSaver" parent="." unique_id=1777036214 instance=ExtResource("3_r533b")]
+
+[node name="Map" parent="." unique_id=503041579 instance=ExtResource("4_5en1g")]
+
+[node name="UI" parent="." unique_id=1033226781 instance=ExtResource("5_8fhae")]
+layout_mode = 1

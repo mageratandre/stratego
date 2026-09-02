@@ -4,14 +4,18 @@ extends Node
 @export var gamelogic : Node
 @export var map : Node3D
 @export var datasaver : Node
-@export var ia_display : IADisplay
+
+@export var UI : Control
+@export var minimap : Control
+
 
 var pieces = [1,6,1,1,1,2,3,4,4,4,5,8]
 
 var winner
+signal game_ended
+signal next_turn_debug
 
-var turn_count = 0
-var piece_captured = 0
+var turn_count
 var current_player 
 
 var saving
@@ -21,13 +25,34 @@ var ia_blue
 
 var dict_total
 
-func _ready() -> void:
-	set_param(PieceTypes.color.BLUE,true,"res://save_file_ia.dat", 
-	load("res://scenes/logic_scenes/ia.tscn").instantiate(),
-	load("res://scenes/logic_scenes/ia_mid.tscn").instantiate())
-	ia_display.set_mode(1)
-	ia_display.init()
-	new_game()
+var debug_mode = false
+var playing_debug = false
+var time_to_wait_debug = 0.05
+var printing = false
+
+func _ready() -> void:    
+	
+	for i in range(0,map.get_node("Container").get_child_count()):
+		minimap.add_cell(map.get_node("Container").get_child(i).get_cell())
+	
+	minimap.draw_cells()
+	
+	if debug_mode : 
+		set_param(PieceTypes.color.BLUE,true,"res://save_file_ia.dat", 
+		load("res://scenes/logic_scenes/ia_basic.tscn").instantiate(),
+		load("res://scenes/logic_scenes/ia_mid.tscn").instantiate())
+
+		if ia_blue.get_class() == IA_mid.new().get_class():
+			ia_blue.to_print_signal.connect(to_print)
+		
+		UI.go_forward.connect(_on_forward_pressed_debug)
+		UI.play_pause.connect(_on_pause_play_pressed)
+		
+		new_game()
+	
+func to_print(texte):
+	if printing:
+		print("Tour n°"+str(turn_count)+" : "+str(texte))
 
 func set_param(_first_player, _saving, _filename, _ia_red, _ia_blue) -> void:
 	
@@ -40,6 +65,7 @@ func set_param(_first_player, _saving, _filename, _ia_red, _ia_blue) -> void:
 
 func new_game():
 	
+	turn_count = 0
 	dict_total = ia_red.setup(map,pieces,PieceTypes.color.RED) as Dictionary
 	dict_total.merge(ia_blue.setup(map,pieces,PieceTypes.color.BLUE))
 	saver("open")
@@ -48,10 +74,11 @@ func new_game():
 	gamelogic.set_map(map)
 	gamelogic.set_dict(dict_total)
 	saver("save")
+
 	while !gamelogic.get_finished():
 		
-		ia_display.set_dict(dict_total)
-		ia_display.load_turn(turn_count)
+		minimap.draw_pieces(dict_total)
+		UI.set_number_of_turn(str(turn_count)+"/?")
 		
 		if gamelogic.get_player() == PieceTypes.color.BLUE:
 			one_turn(PieceTypes.color.BLUE)
@@ -59,7 +86,23 @@ func new_game():
 			one_turn(PieceTypes.color.RED)
 		update_stat()
 		
-		await ia_display.next_turn
+		if debug_mode : 
+			await next_turn_debug
+			
+	playing_debug = false
+
+func _on_forward_pressed_debug():
+	next_turn_debug.emit()
+
+func _on_pause_play_pressed():
+	playing_debug = !playing_debug
+	UI.set_play_pause_icon()
+	main_loop_debug()
+
+func main_loop_debug():
+	while playing_debug : 
+		await get_tree().create_timer(time_to_wait_debug).timeout
+		next_turn_debug.emit()
 
 func one_turn(player) : 
 	var possible_moves = gamelogic.compute_possible_moves(player,dict_total)
@@ -78,6 +121,8 @@ func update_stat():
 	
 func _on_game_logic_end_game(winner: Variant,captured) -> void:
 	self.winner = winner
+	self.game_ended.emit()
+	
 	if captured:
 		saver("save")		
 	saver("close")

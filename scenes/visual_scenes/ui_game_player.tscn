@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://uh7c2iw0lwy8"]
+
+[ext_resource type="Script" uid="uid://c81vhpdf4kj7q" path="res://scripts/play_mode.gd" id="1_epryw"]
+[ext_resource type="Theme" uid="uid://bg73x8xepduax" path="res://Theme_and_materials/UI_general.theme" id="2_dqtis"]
+[ext_resource type="Texture2D" uid="uid://cki80ab1itlb1" path="res://assets/images/arrow_left.png" id="3_acr4e"]
+[ext_resource type="Texture2D" uid="uid://dsv5kkqpo6rrm" path="res://assets/images/play.png" id="4_wbkap"]
+[ext_resource type="Texture2D" uid="uid://bqq7dwx4b0pfb" path="res://assets/images/arrow.png" id="5_6a7tg"]
+
+[node name="UI" type="Control" unique_id=1033226781 node_paths=PackedStringArray("button_pause_play", "turn_label", "turn_slider")]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+script = ExtResource("1_epryw")
+button_pause_play = NodePath("HBoxContainer/Play_Pause")
+turn_label = NodePath("HBoxContainer/Turn")
+turn_slider = NodePath("HBoxContainer/Turn_count_slider")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1464314350]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 237.0
+offset_top = 23.0
+offset_right = -287.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backward" type="Button" parent="HBoxContainer" unique_id=1770896978]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme = ExtResource("2_dqtis")
+icon = ExtResource("3_acr4e")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Play_Pause" type="Button" parent="HBoxContainer" unique_id=870660648]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme = ExtResource("2_dqtis")
+icon = ExtResource("4_wbkap")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Forward" type="Button" parent="HBoxContainer" unique_id=1542064559]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme = ExtResource("2_dqtis")
+icon = ExtResource("5_6a7tg")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Turn" type="Label" parent="HBoxContainer" unique_id=486501693]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_dqtis")
+text = "1/1256"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Turn_count_slider" type="HSlider" parent="HBoxContainer" unique_id=1257342711]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+step = 0.001
+
+[connection signal="pressed" from="HBoxContainer/Backward" to="." method="_on_backward_pressed"]
+[connection signal="pressed" from="HBoxContainer/Play_Pause" to="." method="_on_play_pause_pressed"]
+[connection signal="pressed" from="HBoxContainer/Forward" to="." method="_on_forward_pressed"]
+[connection signal="drag_ended" from="HBoxContainer/Turn_count_slider" to="." method="_on_turn_count_slider_drag_ended"]
+[connection signal="drag_started" from="HBoxContainer/Turn_count_slider" to="." method="_on_turn_count_slider_drag_started"]
+[connection signal="value_changed" from="HBoxContainer/Turn_count_slider" to="." method="_on_turn_count_slider_value_changed"]

@@ -8,6 +8,8 @@ var dict_main : Dictionary
 var map : Node3D
 var current_player : int
 
+var tour_number = 0
+
 signal piece_move(player,mvt)
 signal redraw(player,move,dict)
 signal piece_captured(piece1,piece2,winner,tied,cell)
@@ -103,7 +105,10 @@ func move_piece(player,mvt,dict_main)-> Dictionary:
 		else : 
 			dict_main[mvt[1]] = piece
 	redraw.emit(player,mvt,dict_main)
+	
 	current_player = get_ennemy_player(player)
+	tour_number +=1
+	
 	return dict_main
 	
 func get_ennemy_player(player) : 

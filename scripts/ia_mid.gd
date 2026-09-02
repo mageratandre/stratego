@@ -3,6 +3,7 @@ class_name IA_mid extends IA_basic
 @export var gamelogic : Node
 
 var astar_grid : AStarGrid2D
+signal to_print_signal(texte)
 
 func setup(map, number_piece, player) -> Dictionary:
 	
@@ -54,30 +55,35 @@ func compute_next_move(player,possible_moves,dict_total):
 			if dict_total[move[1]][2]==1:
 				var winner = gamelogic.fight(dict_total[move[0]],dict_total[move[1]])
 				if winner == [null]:
+					to_print("match null imminent")
 					points.append(0)
 				elif winner[1] == player:
 					points.append(1)
+					to_print("victoire imminante")
 				else : 
 					points.append(-1)
+					to_print("défaite imminente")
 			else : 
 				if dict_total[move[0]][0] == PieceTypes.types.SCOUT or dict_total[move[0]][0] == PieceTypes.types.SERGEANT:
 					points.append(0.5)
+					to_print("un scout/sergeant peut identifier une pièce")
 				else : 
-					points.append(0.01)
+					points.append(0.1)
+					to_print("un pièce peut identifer une autre")
 					
 		# check si on peut arriver à une victoire garantie
 		else : 
 			var cells = dict_total.keys()
 			var weights = []
 			for cell in cells:
+				astar_grid.set_point_solid(Vector2i(cell.x,cell.z),false)
 				if dict_total[cell][1]!= player and dict_total[cell][2] == 1:
 					var winner = gamelogic.fight(dict_total[move[0]],dict_total[cell])
 					if winner != [null]:
 						if winner[1]==player : 
-							var path = astar_grid.get_point_path(Vector2i(move[1].x,move[1].y),Vector2i(cell.x,cell.y))
+							var path = astar_grid.get_point_path(Vector2i(move[1].x,move[1].z),Vector2i(cell.x,cell.z))
 							if len(path)>0:
-								print("piece "+str(dict_total[move[0]])+" va vers "+str(dict_total[cell]))
-								print(path)
+								to_print(path)
 								weights.append(2.0*(1.0/float(len(path))))
 							else : 
 								weights.append(0)
@@ -87,14 +93,18 @@ func compute_next_move(player,possible_moves,dict_total):
 						weights.append(0)
 				else : 
 					weights.append(0)
+				astar_grid.set_point_solid(Vector2i(cell.x,cell.z),true)
 			points.append(weights.max())
 		
 		if player == PieceTypes.color.BLUE : 
 			if move[0].x > move[1].x:
-				points[-1]+=0.01 
+				points[-1]+=0.01
+			points[-1] +=0.005*abs(move[0].x-5)
+
 		else :
 			if move[0].x < move[1].x:
 				points[-1]+=0.01 
+			points[-1] +=0.005*abs(move[0].x+5)
 	var best_moves = []
 	
 	for i in range(0,len(points)):
@@ -105,11 +115,11 @@ func compute_next_move(player,possible_moves,dict_total):
 	
 	return final_move
 							 
-						
+func to_print(text):
+	to_print_signal.emit(text)				
 				
 func generate_astar_grid(dict_total):
 	var cells = dict_total.keys()
-		
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = Rect2i(Vector2i(-5,-5),Vector2i(10,10))
 	astar_grid.cell_size = Vector2(1,1)
@@ -122,7 +132,11 @@ func generate_astar_grid(dict_total):
 		astar_grid.set_point_solid(cell)
 	for cell in cells : 
 		astar_grid.set_point_solid(Vector2i(cell.x,cell.z))
-		
+	var data = astar_grid.get_point_data_in_region(Rect2i(Vector2i(-5,-5),Vector2i(10,10)))
+	var num = 0
+	for val in data : 
+		if true:
+			num+=1
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	
 	
