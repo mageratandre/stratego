@@ -3,18 +3,12 @@ extends Label
 var period = 1
 var time = 0
 
-var mode = false
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if mode:
-		time+=delta
-		var val = sin(2*PI*time/period)
-		if val >=0:
-			visible = true
-		else : 
-			visible = false
-			
-func set_mode(_mode):
-	self.mode = _mode
+	time+=delta
+	var val = sin(2*PI*time/period)
+	if val >=0:
+		visible = true
+	else : 
+		visible = false
 	

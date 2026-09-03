@@ -28,6 +28,9 @@ func set_map(map):
 func get_finished():
 	return finished
 
+func set_finished(val):
+	finished = val
+
 func get_player():
 	return current_player
 	
@@ -182,7 +185,7 @@ func check_spy(piece1,piece2):
 		return [false]
 		
 func end_game_function(winner,captured):
-	finished = true
+	set_finished(true)
 	end_game.emit(winner,captured)
 	
 	

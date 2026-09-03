@@ -27,16 +27,12 @@ var dict_total
 
 var debug_mode = false
 var playing_debug = false
-var time_to_wait_debug = 0.05
+var time_to_wait_debug = 0.01
 var printing = false
 
 func _ready() -> void:    
-	
-	for i in range(0,map.get_node("Container").get_child_count()):
-		minimap.add_cell(map.get_node("Container").get_child(i).get_cell())
-	
-	minimap.draw_cells()
-	
+	reset()
+		
 	if debug_mode : 
 		set_param(PieceTypes.color.BLUE,true,"res://save_file_ia.dat", 
 		load("res://scenes/logic_scenes/ia_basic.tscn").instantiate(),
@@ -60,12 +56,20 @@ func set_param(_first_player, _saving, _filename, _ia_red, _ia_blue) -> void:
 	self.saving = _saving
 	self.ia_red = _ia_red
 	self.ia_blue = _ia_blue
-	self.save_file =_filename
+	self.save_file = _filename
 	
+
+func reset():
+	for i in range(0,map.get_node("Container").get_child_count()):
+		minimap.add_cell(map.get_node("Container").get_child(i).get_cell())
+	
+	minimap.draw_cells()
+	
+	winner = null
+	turn_count = 0
 
 func new_game():
 	
-	turn_count = 0
 	dict_total = ia_red.setup(map,pieces,PieceTypes.color.RED) as Dictionary
 	dict_total.merge(ia_blue.setup(map,pieces,PieceTypes.color.BLUE))
 	saver("open")
@@ -73,6 +77,8 @@ func new_game():
 	gamelogic.set_player(current_player)
 	gamelogic.set_map(map)
 	gamelogic.set_dict(dict_total)
+	gamelogic.set_finished(false)
+	
 	saver("save")
 
 	while !gamelogic.get_finished():
@@ -121,8 +127,6 @@ func update_stat():
 	
 func _on_game_logic_end_game(winner: Variant,captured) -> void:
 	self.winner = winner
-	self.game_ended.emit()
-	
 	if captured:
 		saver("save")		
 	saver("close")

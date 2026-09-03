@@ -1,10 +1,24 @@
 [gd_scene format=3 uid="uid://xn0tph36ws4p"]
 
 [ext_resource type="Script" uid="uid://56fxufmi8ieh" path="res://scripts/ia_competition.gd" id="1_6msrc"]
-[ext_resource type="PackedScene" uid="uid://c18n8akt1kka4" path="res://scenes/Main_scenes/IAScene.tscn" id="2_q0f4b"]
 
-[node name="IACompetition" type="Node" unique_id=1019582014 node_paths=PackedStringArray("game")]
+[node name="IACompetition" type="Node" unique_id=1019582014]
 script = ExtResource("1_6msrc")
-game = NodePath("IAvsIAScene")
 
-[node name="IAvsIAScene" parent="." unique_id=941691256 instance=ExtResource("2_q0f4b")]
+[node name="Button" type="Button" parent="." unique_id=1777875631]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -25.0
+offset_right = 61.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Launch Games"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

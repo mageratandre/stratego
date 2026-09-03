@@ -107,29 +107,29 @@ func set_text_and_tooltip(panel, str,color,revealed) :
 func get_name_piece(piece_int) :
 	
 	if piece_int == PieceTypes.types.MARSHAL:
-		return ["Marshal (10)","9"]
+		return ["Marshal (9)","9"]
 	elif piece_int == PieceTypes.types.BANNER:
-		return ["Banner (0)","F"]
+		return ["Flag (F)","F"]
 	elif piece_int == PieceTypes.types.BOMB:
-		return ["Bomb (11)","B"]
+		return ["Bomb (B)","B"]
 	elif piece_int == PieceTypes.types.CAPTAIN:
-		return ["Captain (6)","5"]
+		return ["Captain (5)","5"]
 	elif piece_int == PieceTypes.types.COLONEL:
-		return ["Colonel (8)","7"]
+		return ["Colonel (7)","7"]
 	elif piece_int == PieceTypes.types.GENERAL:
-		return ["General (9)","8"]
+		return ["General (8)","8"]
 	elif piece_int == PieceTypes.types.LIEUTENANT:
-		return ["Lieutenant (5)","4"]
+		return ["Lieutenant (4)","4"]
 	elif piece_int == PieceTypes.types.MAJOR:
-		return ["Major (7)","6"]
+		return ["Major (6)","6"]
 	elif piece_int == PieceTypes.types.MINER:
-		return ["Miner (3)","2"]
+		return ["Miner (2)","2"]
 	elif piece_int == PieceTypes.types.SCOUT:
-		return ["Scout (2)","1"]
+		return ["Scout (1)","1"]
 	elif piece_int == PieceTypes.types.SPY:
-		return ["Spy (1)","0"]
+		return ["Spy (0)","0"]
 	else:
-		return ["Sergeant (4)","3"]
+		return ["Sergeant (3)","3"]
 	
 		
 func get_gradient_double(color1 : Color, color2 : Color, color3 : Color, intervals : int)->Array:
