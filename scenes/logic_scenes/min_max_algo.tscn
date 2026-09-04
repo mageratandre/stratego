@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cy542jvfeqouh"]
+
+[ext_resource type="Script" uid="uid://cko8en82c728s" path="res://scripts/min_max_algo.gd" id="1_xhhqo"]
+
+[node name="MinMaxAlgo" type="Node" unique_id=379915866]
+script = ExtResource("1_xhhqo")
