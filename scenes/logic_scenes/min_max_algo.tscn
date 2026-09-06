@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cy542jvfeqouh"]
 
 [ext_resource type="Script" uid="uid://cko8en82c728s" path="res://scripts/min_max_algo.gd" id="1_xhhqo"]
+[ext_resource type="PackedScene" uid="uid://caoekqhbnrvsr" path="res://scenes/logic_scenes/game_logic.tscn" id="2_h4s5v"]
 
 [node name="MinMaxAlgo" type="Node" unique_id=379915866]
 script = ExtResource("1_xhhqo")
+
+[node name="GameLogic" parent="." unique_id=352644410 instance=ExtResource("2_h4s5v")]

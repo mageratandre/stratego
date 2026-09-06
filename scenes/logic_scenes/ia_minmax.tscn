@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c52b6gm2hqjgk"]
+
+[ext_resource type="Script" uid="uid://bnhpnus88xs27" path="res://scripts/ia_minmax.gd" id="1_v7o6c"]
+[ext_resource type="PackedScene" uid="uid://cy542jvfeqouh" path="res://scenes/logic_scenes/min_max_algo.tscn" id="2_5swaj"]
+
+[node name="IA_minmax" type="Node" unique_id=295277110]
+script = ExtResource("1_v7o6c")
+
+[node name="MinMaxAlgo" parent="." unique_id=379915866 instance=ExtResource("2_5swaj")]

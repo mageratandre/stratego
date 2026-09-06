@@ -25,7 +25,7 @@ var ia_blue
 
 var dict_total
 
-var debug_mode = false
+var debug_mode = true
 var playing_debug = false
 var time_to_wait_debug = 0.01
 var printing = false
@@ -35,8 +35,8 @@ func _ready() -> void:
 		
 	if debug_mode : 
 		set_param(PieceTypes.color.BLUE,true,"res://save_file_ia.dat", 
-		load("res://scenes/logic_scenes/ia_basic.tscn").instantiate(),
-		load("res://scenes/logic_scenes/ia_mid.tscn").instantiate())
+		load("res://scenes/logic_scenes/ia.tscn").instantiate(),
+		load("res://scenes/logic_scenes/ia_minmax.tscn").instantiate())
 
 		if ia_blue.get_class() == IA_mid.new().get_class():
 			ia_blue.to_print_signal.connect(to_print)
